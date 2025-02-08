@@ -58,8 +58,8 @@ const Index = () => {
         render={({ field }) => {
          return (
           <FormItem>
-           <FormLabel className='block text-center'>
-            Enter your email below to recieve an otp
+           <FormLabel className='block text-center text-xl pb-4'>
+            Enter your email below to recieve an OTP
            </FormLabel>
            <FormControl>
             <Input placeholder='Email address' type='email' {...field} />
