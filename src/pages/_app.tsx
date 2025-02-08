@@ -8,6 +8,7 @@ import {
 } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { useState } from "react";
+import { ToastContainer } from "react-toastify";
 
 export default function App({ Component, pageProps }: AppProps) {
 
@@ -17,6 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <HydrationBoundary state={pageProps.dehydratedState}>
         <Component {...pageProps} />
+        <ToastContainer />
       </HydrationBoundary>
       <ReactQueryDevtools />
     </QueryClientProvider>
