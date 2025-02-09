@@ -6,9 +6,14 @@ import {
 } from '@/utils/auth';
 import { GetServerSideProps } from 'next';
 import { Routes } from '@/utils/routes';
+import { ContentLayout } from '@/components/ui/content-layout';
 
 export default function Home() {
- return <div>Dashboard</div>;
+ return (
+  <ContentLayout title='Dashboard'>
+   <div></div>
+  </ContentLayout>
+ );
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {

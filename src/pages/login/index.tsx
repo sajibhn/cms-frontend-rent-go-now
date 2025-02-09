@@ -58,7 +58,7 @@ const Index = () => {
         render={({ field }) => {
          return (
           <FormItem>
-           <FormLabel className='block text-center text-xl pb-4'>
+           <FormLabel className='block pb-4 text-center text-xl'>
             Enter your email below to recieve an OTP
            </FormLabel>
            <FormControl>

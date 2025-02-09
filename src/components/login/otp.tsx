@@ -60,13 +60,15 @@ const Otp = ({ userEmail }: { userEmail: string }) => {
      onSubmit={form.handleSubmit(onSubmit)}
      className='flex w-full max-w-md flex-col items-center justify-center gap-4'
     >
-     <FormLabel className='text-center block text-xl'>Enter the OTP</FormLabel>
+     <FormLabel className='block text-center text-xl'>Enter the OTP</FormLabel>
      <FormField
       control={form.control}
       name='otp'
       render={({ field }) => (
        <FormItem>
-        <FormLabel className='block text-center pb-2'>One-Time Password</FormLabel>
+        <FormLabel className='block pb-2 text-center'>
+         One-Time Password
+        </FormLabel>
         <FormControl>
          <InputOTP maxLength={6} {...field} pattern={REGEXP_ONLY_DIGITS}>
           <InputOTPGroup>
