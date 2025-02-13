@@ -75,3 +75,38 @@ export interface PaginatorInfo<T> {
  to: number;
  total: number;
 }
+
+export enum SortOrder {
+ Asc = 'asc',
+ Desc = 'desc',
+}
+
+export interface QueryOptions {
+ language?: string;
+ limit?: number;
+ page?: number;
+ orderBy?: string;
+ sortedBy?: SortOrder;
+}
+export interface State {
+ id: string;
+ name: string;
+ location: {
+  coordinates: number[];
+ };
+ description: string;
+ createdAt: string;
+ updatedAt: string;
+ url: string;
+}
+
+export interface CreateStateInput {
+ id?: string;
+ name: string;
+ description: string;
+ location: {
+  type: string;
+  coordinates: number[];
+ };
+ url: string;
+}

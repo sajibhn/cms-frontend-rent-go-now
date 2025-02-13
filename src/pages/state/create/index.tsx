@@ -1,22 +1,23 @@
+import { GetServerSideProps } from 'next';
 import {
  allowedRoles,
  getAuthCredentials,
  hasAccess,
  isAuthenticated,
 } from '@/utils/auth';
-import { GetServerSideProps } from 'next';
 import { Routes } from '@/utils/routes';
+import CreateOrUpdateForm from '@/components/state/create-or-update-state';
 import { ContentLayout } from '@/components/ui/content-layout';
 
-const Home = () => {
+const StateCreate = () => {
  return (
-  <ContentLayout title='Dashboard'>
-   <div></div>
+  <ContentLayout title='Create State'>
+   <CreateOrUpdateForm />
   </ContentLayout>
  );
 };
 
-export default Home;
+export default StateCreate;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
  const { token, permissions } = getAuthCredentials(ctx);

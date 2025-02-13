@@ -60,8 +60,8 @@ export class HttpClient {
   return response.data;
  }
 
- static async put<T>(url: string, data: unknown) {
-  const response = await axios.put<T>(url, data);
+ static async patch<T>(url: string, data: unknown) {
+  const response = await axios.patch<T>(url, data);
   return response.data;
  }
 

@@ -20,6 +20,11 @@ const items = [
   url: '/',
   icon: LayoutDashboard,
  },
+ {
+  title: 'State',
+  url: '/state',
+  icon: LayoutDashboard,
+ },
 ];
 
 export function AppSidebar() {
