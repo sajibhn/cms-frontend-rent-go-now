@@ -1,4 +1,4 @@
-import { LayoutDashboard } from 'lucide-react';
+import { Building2, LayoutDashboard } from 'lucide-react';
 
 import {
  Sidebar,
@@ -24,6 +24,11 @@ const items = [
   title: 'State',
   url: '/state',
   icon: LayoutDashboard,
+ },
+ {
+  title: 'City',
+  url: '/city',
+  icon: Building2,
  },
 ];
 

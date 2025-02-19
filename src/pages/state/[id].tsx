@@ -8,7 +8,7 @@ const UpdateState = () => {
  const params = useParams();
  const stateId = params?.id;
 
- const { data, loading, error } = useStateQuery({
+ const { data, initialLoading, error } = useStateQuery({
   id: stateId,
   options: {
    enabled: Boolean(stateId),
@@ -16,7 +16,7 @@ const UpdateState = () => {
  });
 
  return (
-  <ContentLayout title='Update State' loading={loading} error={error}>
+  <ContentLayout title='Update State' loading={initialLoading} error={error}>
    <CreateOrUpdateForm initialValues={data} />
   </ContentLayout>
  );

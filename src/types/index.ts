@@ -110,3 +110,28 @@ export interface CreateStateInput {
  };
  url: string;
 }
+
+export interface City {
+ id: string;
+ name: string;
+ location: {
+  coordinates: number[];
+ };
+ description: string;
+ createdAt: string;
+ updatedAt: string;
+ url: string;
+ state: State;
+}
+
+export interface CreateCityInput {
+ id?: string;
+ name: string;
+ description: string;
+ location: {
+  type: string;
+  coordinates: number[];
+ };
+ url: string;
+ stateId: string;
+}

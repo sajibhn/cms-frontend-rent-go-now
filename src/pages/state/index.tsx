@@ -18,7 +18,7 @@ import { useRouter } from 'next/router';
 const StatePage = () => {
  const router = useRouter();
 
- const { data, loading, error } = useStatesQuery();
+ const { data, initialLoading, error } = useStatesQuery();
 
  const columns: ColumnDef<State>[] = [
   {
@@ -62,7 +62,7 @@ const StatePage = () => {
  ];
 
  return (
-  <ContentLayout title='State' loading={loading} error={error}>
+  <ContentLayout title='State' loading={initialLoading} error={error}>
    <div className='container mx-auto py-10'>
     <div className='mb-4 flex w-full justify-end'>
      <Button className='text-left' onClick={() => router.push('/state/create')}>

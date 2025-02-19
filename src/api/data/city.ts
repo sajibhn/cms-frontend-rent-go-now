@@ -1,17 +1,17 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { API_ENDPOINTS } from './client/api-endpoints';
-import { stateClient } from './client/state';
 import { toast } from 'react-toastify';
-import { State } from '@/types';
+import { City } from '@/types';
+import { cityClient } from './client/city';
 
-export const useStatesQuery = (params: any = {}, options?: any) => {
+export const useCitiesQuery = (params: any = {}, options?: any) => {
  const { data, error, isPending, refetch, isError, isLoading } = useQuery<
-  State[],
+  City[],
   Error
  >({
-  queryKey: [API_ENDPOINTS.STATE, params],
+  queryKey: [API_ENDPOINTS.CITY, params],
   queryFn: ({ queryKey, pageParam }) =>
-   stateClient.all(Object.assign({}, queryKey[1], pageParam)),
+   cityClient.all(Object.assign({}, queryKey[1], pageParam)),
   staleTime: 5000,
   ...options,
  });
@@ -26,13 +26,13 @@ export const useStatesQuery = (params: any = {}, options?: any) => {
  };
 };
 
-export const useStateQuery = ({ id, options }: any) => {
+export const useCityQuery = ({ id, options }: any) => {
  const { data, error, isPending, refetch, isError, isLoading } = useQuery<
-  State,
+  City,
   Error
  >({
-  queryKey: [API_ENDPOINTS.STATE, { id }],
-  queryFn: () => stateClient.get({ id }),
+  queryKey: [API_ENDPOINTS.CITY, { id }],
+  queryFn: () => cityClient.get({ id }),
   staleTime: 5000,
   ...options,
  });
@@ -47,11 +47,11 @@ export const useStateQuery = ({ id, options }: any) => {
  };
 };
 
-export function useStateMutation() {
+export function useCityMutation() {
  return useMutation({
-  mutationFn: stateClient.create,
+  mutationFn: cityClient.create,
   onSuccess: () => {
-   toast.success('State is created');
+   toast.success('City is created');
   },
   onError: async (error: any) => {
    const response = JSON.stringify(error);
@@ -71,11 +71,15 @@ export function useStateMutation() {
  });
 }
 
-export function useUpdateStateMutation() {
+export function useUpdateCityMutation() {
+ const queryClient = useQueryClient();
+
  return useMutation({
-  mutationFn: stateClient.update,
-  onSuccess: () => {
-   toast.success('State is updated');
+  mutationFn: cityClient.update,
+  onSuccess: (_data, variables) => {
+   const { id } = variables;
+   toast.success('City is updated');
+   queryClient.invalidateQueries({ queryKey: [API_ENDPOINTS.CITY, { id }] });
   },
   onError: async (error: any) => {
    const response = JSON.stringify(error);
