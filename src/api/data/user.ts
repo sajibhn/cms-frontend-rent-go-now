@@ -12,7 +12,7 @@ export function useLoginMutation() {
   onSuccess: () => {
    toast.success('Sent logged in succesfully!');
   },
-  onError: async (error: any, query) => {
+  onError: async (error: any ) => {
    const response = JSON.stringify(error);
    const response2 = JSON.parse(response);
    if (response2.status === 500) {
@@ -34,7 +34,7 @@ export function useOtpMutation() {
  return useMutation({
   mutationFn: userClient.otp,
 
-  onError: async (error: any, query) => {
+  onError: async (error: any ) => {
    const response = JSON.stringify(error);
    const response2 = JSON.parse(response);
    if (response2.status === 500) {

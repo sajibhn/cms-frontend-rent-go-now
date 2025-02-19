@@ -1,4 +1,3 @@
-import { SheetMenu } from './sheet-menu';
 import { SidebarTrigger } from './sidebar';
 
 interface NavbarProps {
