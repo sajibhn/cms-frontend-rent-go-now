@@ -4,4 +4,5 @@ export const API_ENDPOINTS = {
  LOGOUT: '/auth/signout',
  STATE: '/state',
  CITY: '/city',
+	NEIGHBORHOOD: '/neighborhood',
 };

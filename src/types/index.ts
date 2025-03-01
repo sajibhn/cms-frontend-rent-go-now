@@ -135,3 +135,28 @@ export interface CreateCityInput {
  url: string;
  stateId: string;
 }
+
+export interface Neighborhood {
+ id: string;
+ name: string;
+ location: {
+  coordinates: number[];
+ };
+ description: string;
+ createdAt: string;
+ updatedAt: string;
+ url: string;
+ city: State;
+}
+
+export interface CreateNeighborhoodInput {
+ id?: string;
+ name: string;
+ description: string;
+ location: {
+  type: string;
+  coordinates: number[];
+ };
+ url: string;
+ cityId: string;
+}

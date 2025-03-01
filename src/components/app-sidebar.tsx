@@ -30,6 +30,11 @@ const items = [
   url: '/city',
   icon: Building2,
  },
+ {
+  title: 'Neighborhood',
+  url: '/neighborhood',
+  icon: Building2,
+ },
 ];
 
 export function AppSidebar() {
