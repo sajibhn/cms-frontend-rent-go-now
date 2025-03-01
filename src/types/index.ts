@@ -160,3 +160,30 @@ export interface CreateNeighborhoodInput {
  url: string;
  cityId: string;
 }
+
+export interface Apartments {
+ id: string;
+ name: string;
+ address: string,
+ location: {
+  coordinates: number[];
+ };
+ description: string;
+ createdAt: string;
+ updatedAt: string;
+ url: string;
+ neighborhood: Neighborhood;
+}
+
+export interface CreateApartmentsInput {
+ id?: string;
+ name: string;
+ address: string,
+ description: string;
+ location: {
+  type: string;
+  coordinates: number[];
+ };
+ url: string;
+ neighborhoodId: string;
+}

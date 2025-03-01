@@ -5,4 +5,5 @@ export const API_ENDPOINTS = {
  STATE: '/state',
  CITY: '/city',
 	NEIGHBORHOOD: '/neighborhood',
+	APARTMENTS: '/apartments',
 };
