@@ -6,4 +6,5 @@ export const API_ENDPOINTS = {
  CITY: '/city',
 	NEIGHBORHOOD: '/neighborhood',
 	APARTMENTS: '/apartments',
+	UNITS: '/units',
 };

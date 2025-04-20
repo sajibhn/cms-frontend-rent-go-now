@@ -23,7 +23,7 @@ const items = [
  {
   title: 'State',
   url: '/state',
-  icon: LayoutDashboard,
+  icon: Building2,
  },
  {
   title: 'City',
@@ -38,6 +38,11 @@ const items = [
  {
   title: 'Apartments',
   url: '/apartments',
+  icon: Building2,
+ },
+ {
+  title: 'Units',
+  url: '/units',
   icon: Building2,
  },
 ];

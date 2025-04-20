@@ -187,3 +187,39 @@ export interface CreateApartmentsInput {
  url: string;
  neighborhoodId: string;
 }
+
+export interface CreateUnitInput {
+ id?: string;
+ name: string;
+ bedrooms: number;
+ bathrooms: number;
+ floorArea: number;
+ price: number;
+ minLeaseMonths: number;
+ minRentPeriod: number;
+ contact: string;
+ amenities: string;
+ facilities: string;
+ isFullyFurnished: boolean;
+ description?: string;
+ apartmentId: string;
+};
+
+export type Unit = {
+ id: string;
+ name: string;
+ bedrooms: number;
+ bathrooms: number;
+ floorArea: number;
+ price: number;
+ minLeaseMonths: number;
+ minRentPeriod: number;
+ contact: string;
+ amenities: string;
+ facilities: string;
+ isFullyFurnished: boolean;
+ description?: string;
+ createdAt: string;
+ updatedAt: string;
+ apartment: Apartments;
+};
