@@ -33,6 +33,9 @@ import {
   CommandItem,
   CommandList,
 } from '@/components/ui/command';
+import { amenities, facilities } from '@/utils/constant';
+import makeAnimated from 'react-select/animated';
+import Select from 'react-select'
 
 const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
 
@@ -40,8 +43,24 @@ interface UnitProps {
   initialValues?: Unit;
 }
 
+type OptionType = {
+  value: string;
+  label: string;
+};
+
+const amenityOptions: OptionType[] = amenities.map(amenity => ({
+  value: amenity,
+  label: amenity
+}));
+
+const facilitiesOption: OptionType[] = facilities.map(amenity => ({
+  value: amenity,
+  label: amenity
+}));
+
+
 const UnitCreateOrUpdateForm = ({ initialValues }: UnitProps) => {
-  console.log(initialValues)
+
   const router = useRouter();
    const [apartment, setApartment] = useState<string>(initialValues?.apartment?.name ?? '');
 
@@ -66,8 +85,8 @@ const UnitCreateOrUpdateForm = ({ initialValues }: UnitProps) => {
     minLeaseMonths: z.coerce.number().int().positive(),
     minRentPeriod: z.coerce.number().int().positive(),
     contact: z.string().min(1, "Contact info required"),
-    amenities: z.string().min(1, "At least one amenity required"),
-    facilities: z.string().min(1, "At least one facility required"),
+    amenities: z.array(z.string()).min(1, "At least one amenity required"),
+    facilities: z.array(z.string()).min(1, "At least one amenity required"),
     isFullyFurnished: z.boolean(),
     description: z.string().optional(),
     apartmentId: z.string().uuid("Invalid apartment ID")
@@ -78,7 +97,9 @@ const UnitCreateOrUpdateForm = ({ initialValues }: UnitProps) => {
   const form = useForm<FormFields>({
     defaultValues: initialValues ? {
       ...initialValues,
-      apartmentId: initialValues.apartment?.id
+      apartmentId: initialValues.apartment?.id,
+      amenities: initialValues.amenities.split(',').map(a => a.trim()),
+      facilities: initialValues.facilities.split(',').map(a => a.trim()),
     } : {},
     resolver: zodResolver(formSchema),
   });
@@ -86,6 +107,8 @@ const UnitCreateOrUpdateForm = ({ initialValues }: UnitProps) => {
   const onSubmit = (values: FormFields) => {
     const unitData: CreateUnitInput = {
       ...values,
+      amenities: values.amenities.join(', '),
+      facilities: values.facilities.join(', '),
       apartmentId: values.apartmentId
     };
 
@@ -307,28 +330,50 @@ const UnitCreateOrUpdateForm = ({ initialValues }: UnitProps) => {
           </div>
 
           {/* Amenities & Facilities */}
+
           <FormField
             control={form.control}
-            name='amenities'
+            name="amenities"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Amenities (comma separated)</FormLabel>
+                <FormLabel>Amenities</FormLabel>
                 <FormControl>
-                  <Input placeholder="WiFi, Parking, AC" {...field} />
+                  <Select
+                    options={amenityOptions}
+                    isMulti
+                    value={amenityOptions.filter(option =>
+                      field.value?.includes(option.value)
+                    )}
+                    onChange={(selected) =>
+                      field.onChange(selected.map(option => option.value))
+                    }
+                    closeMenuOnSelect={false}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
 
+
           <FormField
             control={form.control}
-            name='facilities'
+            name="facilities"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Facilities (comma separated)</FormLabel>
+                <FormLabel>Facilities</FormLabel>
                 <FormControl>
-                  <Input placeholder="Gym, Pool" {...field} />
+                  <Select
+                    options={facilitiesOption}
+                    isMulti
+                    value={facilitiesOption.filter(option =>
+                      field.value?.includes(option.value)
+                    )}
+                    onChange={(selected) =>
+                      field.onChange(selected.map(option => option.value))
+                    }
+                    closeMenuOnSelect={false}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
