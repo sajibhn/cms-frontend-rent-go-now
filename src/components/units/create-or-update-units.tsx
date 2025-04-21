@@ -53,9 +53,9 @@ const amenityOptions: OptionType[] = amenities.map(amenity => ({
   label: amenity
 }));
 
-const facilitiesOption: OptionType[] = facilities.map(amenity => ({
-  value: amenity,
-  label: amenity
+const facilitiesOption: OptionType[] = facilities.map(facility => ({
+  value: facility,
+  label: facility
 }));
 
 
