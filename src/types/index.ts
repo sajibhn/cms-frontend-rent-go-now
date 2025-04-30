@@ -98,6 +98,7 @@ export interface State {
  createdAt: string;
  updatedAt: string;
  url: string;
+ media: string[];
 }
 
 export interface CreateStateInput {

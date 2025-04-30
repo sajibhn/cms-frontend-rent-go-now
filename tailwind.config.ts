@@ -11,6 +11,7 @@ export default {
   extend: {
    colors: {
     brand: '#0A8AFF',
+    brandAlt: "#0a8affcc",
     background: 'hsla(var(--background))',
     foreground: 'hsla(var(--foreground))',
     card: {
