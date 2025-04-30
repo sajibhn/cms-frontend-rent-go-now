@@ -35,7 +35,9 @@ import {
 } from '@/components/ui/command';
 import { amenities, facilities } from '@/utils/constant';
 import makeAnimated from 'react-select/animated';
-import Select from 'react-select'
+import Select from 'react-select';
+import { MediaUploader } from '../reusable/MediaUploader';
+import { useEffect } from 'react';
 
 const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
 
@@ -89,7 +91,9 @@ const UnitCreateOrUpdateForm = ({ initialValues }: UnitProps) => {
     facilities: z.array(z.string()).min(1, "At least one amenity required"),
     isFullyFurnished: z.boolean(),
     description: z.string().optional(),
-    apartmentId: z.string().uuid("Invalid apartment ID")
+    apartmentId: z.string().uuid("Invalid apartment ID"),
+    media: z.array(z.string().url("Media URLs must be valid URLs"))
+      .min(1, "At least one media file is required"),
   });
 
   type FormFields = z.infer<typeof formSchema>;
@@ -100,16 +104,32 @@ const UnitCreateOrUpdateForm = ({ initialValues }: UnitProps) => {
       apartmentId: initialValues.apartment?.id,
       amenities: initialValues.amenities.split(',').map(a => a.trim()),
       facilities: initialValues.facilities.split(',').map(a => a.trim()),
-    } : {},
+      media: initialValues.media || [],
+    } : {
+        media: []
+    },
     resolver: zodResolver(formSchema),
   });
+
+    useEffect(() => {
+      if (initialValues) {
+        form.reset({
+          ...initialValues,
+          apartmentId: initialValues.apartment?.id,
+          amenities: initialValues.amenities.split(',').map(a => a.trim()),
+          facilities: initialValues.facilities.split(',').map(a => a.trim()),
+          media: initialValues.media || [],
+        });
+      }
+    }, [initialValues, form]);
 
   const onSubmit = (values: FormFields) => {
     const unitData: CreateUnitInput = {
       ...values,
       amenities: values.amenities.join(', '),
       facilities: values.facilities.join(', '),
-      apartmentId: values.apartmentId
+      apartmentId: values.apartmentId,
+      media: values.media,
     };
 
     if (!initialValues) {
@@ -203,6 +223,24 @@ const UnitCreateOrUpdateForm = ({ initialValues }: UnitProps) => {
                       </Command>
                     </PopoverContent>
                   </Popover>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name='media'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Media</FormLabel>
+                  <FormControl>
+                    <MediaUploader
+                      value={field.value}
+                      onChange={field.onChange}
+                      key={initialValues?.id || 'create'}
+                    />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}

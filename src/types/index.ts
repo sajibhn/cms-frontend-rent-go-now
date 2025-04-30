@@ -123,6 +123,7 @@ export interface City {
  updatedAt: string;
  url: string;
  state: State;
+ media: string[];
 }
 
 export interface CreateCityInput {
@@ -148,6 +149,7 @@ export interface Neighborhood {
  updatedAt: string;
  url: string;
  city: State;
+ media: string[];
 }
 
 export interface CreateNeighborhoodInput {
@@ -174,6 +176,7 @@ export interface Apartments {
  updatedAt: string;
  url: string;
  neighborhood: Neighborhood;
+ media: string[];
 }
 
 export interface CreateApartmentsInput {
@@ -204,6 +207,7 @@ export interface CreateUnitInput {
  isFullyFurnished: boolean;
  description?: string;
  apartmentId: string;
+ media: string[];
 };
 
 export type Unit = {
@@ -223,4 +227,5 @@ export type Unit = {
  createdAt: string;
  updatedAt: string;
  apartment: Apartments;
+ media: string[];
 };
